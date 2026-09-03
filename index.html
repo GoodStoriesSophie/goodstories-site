@@ -49,10 +49,10 @@
         <p style="font-size:19px; line-height:1.55; color:oklch(25% 0.01 260); max-width:46ch; margin-bottom:26px;">
           Let's make it happen for you. I'm Sophie Gonzalez, and I help people navigate the ups and downs of dating — with honesty, warmth, and a plan that actually fits your life.
         </p>
-        <a href="#book" style="display:inline-flex; align-items:center; gap:10px; padding:15px 26px; border-radius:999px; background:oklch(46% 0.07 200); color:oklch(99% 0 0); font-size:15px; font-weight:500;">
+        <button type="button" class="open-consult-modal" style="display:inline-flex; align-items:center; gap:10px; padding:15px 26px; border-radius:999px; border:none; background:oklch(46% 0.07 200); color:oklch(99% 0 0); font-size:15px; font-weight:500; cursor:pointer; font-family:inherit;">
           Contact me for a free consultation
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-        </a>
+        </button>
       </div>
     </div>
   </div>
@@ -101,7 +101,7 @@
     <p style="font-size:16px; line-height:1.6; color:oklch(36% 0.01 260); max-width:48ch;">
       Contact me for a free 20-minute consultation and let's talk about where you're stuck — and what a good story looks like from here.
     </p>
-    <button type="button" id="open-consult-modal" style="display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 30px; border-radius:999px; border:none; background:oklch(46% 0.07 200); color:oklch(99% 0 0); font-size:16px; font-weight:500; cursor:pointer; margin-top:8px; font-family:inherit;">
+    <button type="button" class="open-consult-modal" style="display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 30px; border-radius:999px; border:none; background:oklch(46% 0.07 200); color:oklch(99% 0 0); font-size:16px; font-weight:500; cursor:pointer; margin-top:8px; font-family:inherit;">
       Contact me for a free consultation
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
     </button>
@@ -145,7 +145,7 @@
   <script>
     (function () {
       var overlay = document.getElementById('consult-modal-overlay');
-      var openBtn = document.getElementById('open-consult-modal');
+      var openBtns = document.querySelectorAll('.open-consult-modal');
       var closeBtn = document.getElementById('close-consult-modal');
       var form = document.getElementById('consult-form');
       var success = document.getElementById('consult-success');
@@ -167,7 +167,7 @@
         document.body.style.overflow = '';
       }
 
-      openBtn.addEventListener('click', openModal);
+      openBtns.forEach(function (btn) { btn.addEventListener('click', openModal); });
       closeBtn.addEventListener('click', closeModal);
       overlay.addEventListener('click', function (e) {
         if (e.target === overlay) closeModal();
