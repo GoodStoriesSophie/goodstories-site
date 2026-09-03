@@ -50,7 +50,7 @@
           Let's make it happen for you. I'm Sophie Gonzalez, and I help people navigate the ups and downs of dating — with honesty, warmth, and a plan that actually fits your life.
         </p>
         <a href="#book" style="display:inline-flex; align-items:center; gap:10px; padding:15px 26px; border-radius:999px; background:oklch(46% 0.07 200); color:oklch(99% 0 0); font-size:15px; font-weight:500;">
-          Book a free consultation
+          Contact me for a free consultation
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -95,17 +95,113 @@
     </div>
   </div>
 
-  <!-- Book a consultation -->
+  <!-- Contact -->
   <div id="book" class="container" style="padding:88px 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:22px;">
     <h2 style="font-size:clamp(26px,3.4vw,36px); max-width:16ch;">Ready to write your next chapter?</h2>
     <p style="font-size:16px; line-height:1.6; color:oklch(36% 0.01 260); max-width:48ch;">
-      Book a free 20-minute consultation and let's talk about where you're stuck — and what a good story looks like from here.
+      Contact me for a free 20-minute consultation and let's talk about where you're stuck — and what a good story looks like from here.
     </p>
-    <a href="#" style="display:inline-flex; align-items:center; gap:10px; padding:16px 30px; border-radius:999px; background:oklch(46% 0.07 200); color:oklch(99% 0 0); font-size:16px; font-weight:500; margin-top:8px;">
-      Book your free consultation
+    <button type="button" id="open-consult-modal" style="display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:16px 30px; border-radius:999px; border:none; background:oklch(46% 0.07 200); color:oklch(99% 0 0); font-size:16px; font-weight:500; cursor:pointer; margin-top:8px; font-family:inherit;">
+      Contact me for a free consultation
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-    </a>
+    </button>
   </div>
+
+  <!-- Consultation modal -->
+  <div id="consult-modal-overlay" style="position:fixed; inset:0; background:oklch(15% 0.01 260 / 0.55); display:none; align-items:center; justify-content:center; padding:24px; z-index:100;">
+    <div style="position:relative; width:100%; max-width:460px; background:oklch(99% 0.002 260); border-radius:20px; padding:36px 32px; max-height:90vh; overflow-y:auto;">
+      <button type="button" id="close-consult-modal" aria-label="Close" style="position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:50%; border:none; background:oklch(93% 0.006 260); color:oklch(30% 0.01 260); font-size:20px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:inherit;">×</button>
+
+      <h3 style="font-family:'Playfair Display',serif; font-size:22px; font-weight:600; margin-bottom:8px; padding-right:28px; color:oklch(15% 0.01 260);">Contact me for a free consultation</h3>
+      <p style="font-size:14px; line-height:1.5; color:oklch(40% 0.01 260); margin-bottom:20px;">20 minutes, no pressure — just a conversation about where you're stuck.</p>
+
+      <form id="consult-form" action="https://formspree.io/f/moeqwzan" method="POST" style="display:flex; flex-direction:column; gap:14px; text-align:left;">
+        <input type="hidden" name="_subject" value="New consultation request — goodstories">
+        <div>
+          <label for="c-name" style="display:block; font-size:13px; font-weight:500; color:oklch(30% 0.01 260); margin-bottom:6px;">Name</label>
+          <input id="c-name" type="text" name="name" required placeholder="Your name" style="width:100%; padding:13px 16px; border-radius:12px; border:1px solid oklch(85% 0.006 260); background:oklch(97% 0.004 260); color:oklch(20% 0.01 260); font-size:15px; font-family:inherit;">
+        </div>
+        <div>
+          <label for="c-email" style="display:block; font-size:13px; font-weight:500; color:oklch(30% 0.01 260); margin-bottom:6px;">Email</label>
+          <input id="c-email" type="email" name="email" required placeholder="you@email.com" style="width:100%; padding:13px 16px; border-radius:12px; border:1px solid oklch(85% 0.006 260); background:oklch(97% 0.004 260); color:oklch(20% 0.01 260); font-size:15px; font-family:inherit;">
+        </div>
+        <div>
+          <label for="c-message" style="display:block; font-size:13px; font-weight:500; color:oklch(30% 0.01 260); margin-bottom:6px;">What would you like to talk about? <span style="font-weight:400; color:oklch(55% 0.01 260);">(optional)</span></label>
+          <textarea id="c-message" name="message" rows="3" placeholder="A little about where you're at right now…" style="width:100%; padding:13px 16px; border-radius:12px; border:1px solid oklch(85% 0.006 260); background:oklch(97% 0.004 260); color:oklch(20% 0.01 260); font-size:15px; font-family:inherit; resize:vertical;"></textarea>
+        </div>
+        <button type="submit" id="consult-submit" style="display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:15px 26px; border-radius:999px; border:none; background:oklch(46% 0.07 200); color:oklch(99% 0 0); font-size:15px; font-weight:500; cursor:pointer; margin-top:6px; font-family:inherit;">
+          Send request
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </button>
+        <p id="consult-error" hidden style="color:oklch(50% 0.15 25); font-size:14px; margin:0;">Something went wrong sending your request — please try again, or email directly.</p>
+      </form>
+
+      <div id="consult-success" hidden style="padding:22px 20px; border-radius:14px; background:oklch(94% 0.03 150); color:oklch(28% 0.06 150); font-size:15px; line-height:1.6;">
+        Thank you! Your request has been sent — I'll be in touch soon to find a time that works.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var overlay = document.getElementById('consult-modal-overlay');
+      var openBtn = document.getElementById('open-consult-modal');
+      var closeBtn = document.getElementById('close-consult-modal');
+      var form = document.getElementById('consult-form');
+      var success = document.getElementById('consult-success');
+      var errorMsg = document.getElementById('consult-error');
+      var submitBtn = document.getElementById('consult-submit');
+      if (!overlay || !form) return;
+
+      function openModal() {
+        form.hidden = false;
+        success.hidden = true;
+        errorMsg.hidden = true;
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal() {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      openBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.style.display !== 'none') closeModal();
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorMsg.hidden = true;
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function (response) {
+          if (response.ok) {
+            form.hidden = true;
+            success.hidden = false;
+          } else {
+            errorMsg.hidden = false;
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+          }
+        }).catch(function () {
+          errorMsg.hidden = false;
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+        });
+      });
+    })();
+  </script>
 
   <!-- Footer -->
   <div style="width:100%; border-top:1px solid oklch(90% 0.006 260); padding:32px 0;">
